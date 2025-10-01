@@ -1,73 +1,100 @@
-# Welcome to your Lovable project
+# Daniel Odetoye - Interactive Portfolio
 
-## Project info
+A modern, interactive portfolio website featuring parallax animations, 3D effects, and animated robo turtles. Built with React, TypeScript, and Framer Motion.
 
-**URL**: https://lovable.dev/projects/8c872a31-fdd6-4506-972a-d47eb9fb61cd
+## ✨ Features
 
-## How can I edit this code?
+- **Parallax Scrolling**: Smooth parallax effects throughout the page
+- **4 Animated Robo Turtles**: Dancing turtles that respond to user interaction
+- **3D Card Effects**: Interactive project cards with depth and hover effects
+- **Scroll Progress Indicator**: Visual feedback as you navigate
+- **Contact Form**: Integrated email functionality using Web3Forms
+- **Fully Responsive**: Mobile-optimized for all screen sizes
+- **Modern UI**: Built with shadcn/ui and Tailwind CSS
 
-There are several ways of editing your application.
+## 🚀 Technologies Used
 
-**Use Lovable**
+- **React** - UI library
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Fast build tool
+- **Framer Motion** - Animation library
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Re-usable component library
+- **Lucide React** - Beautiful icons
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/8c872a31-fdd6-4506-972a-d47eb9fb61cd) and start prompting.
+## 🛠️ Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js & npm installed ([install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Clone the repository
+git clone https://github.com/thatsdan1/landing-page.git
 
-Follow these steps:
+# Navigate to the project directory
+cd landing-page
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be running at `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📧 Setting Up Email Functionality
 
-**Use GitHub Codespaces**
+To enable the contact form:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Get a free API key from [Web3Forms](https://web3forms.com)
+2. Create a `.env` file in the root directory:
+   ```
+   VITE_WEB3FORMS_ACCESS_KEY=your_api_key_here
+   ```
+3. See [EMAIL_SETUP_INSTRUCTIONS.md](EMAIL_SETUP_INSTRUCTIONS.md) for detailed setup
 
-## What technologies are used for this project?
+## 🚢 Deployment
 
-This project is built with:
+### Vercel (Recommended)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) and sign in
+3. Import your repository
+4. Add environment variable: `VITE_WEB3FORMS_ACCESS_KEY`
+5. Deploy!
 
-## How can I deploy this project?
+### Netlify
 
-Simply open [Lovable](https://lovable.dev/projects/8c872a31-fdd6-4506-972a-d47eb9fb61cd) and click on Share -> Publish.
+1. Go to [netlify.com](https://netlify.com) and sign in
+2. Import your repository
+3. Build command: `npm run build`
+4. Publish directory: `dist`
+5. Add environment variable: `VITE_WEB3FORMS_ACCESS_KEY`
+6. Deploy!
 
-## Can I connect a custom domain to my Lovable project?
+## 📝 Build for Production
 
-Yes, you can!
+```bash
+npm run build
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+The optimized files will be in the `dist/` folder.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE.txt).
+
+## 👨‍💻 Author
+
+**Daniel Odetoye**
+
+- GitHub: [@thatsdan1](https://github.com/thatsdan1)
+- Portfolio: [https://github.com/thatsdan1/landing-page](https://github.com/thatsdan1/landing-page)
+
+---
+
+Made with ❤️ and lots of ☕
