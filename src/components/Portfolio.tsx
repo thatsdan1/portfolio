@@ -37,8 +37,13 @@ const Portfolio = () => {
   });
   const { toast } = useToast();
   const heroRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+
+  const scrollToProjects = () => {
+    projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const springConfig = { damping: 25, stiffness: 150 };
   const x = useSpring(mouseX, springConfig);
@@ -252,14 +257,14 @@ const Portfolio = () => {
             transition={{ duration: 0.8, delay: 1.3 }}
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="cyber" size="lg" className="cyber-glow">
+              <Button variant="cyber" size="lg" className="cyber-glow" onClick={scrollToProjects}>
                 <Rocket className="w-5 h-5" />
                 Projects
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button variant="neon" size="lg" asChild>
-                <a href="/Daniel Odetoye Resume.pdf" download>
+                <a href={`${import.meta.env.BASE_URL}Daniel Odetoye Resume.pdf`} download>
                   <Download className="w-5 h-5" />
                   Download Resume
                 </a>
@@ -439,6 +444,7 @@ const Portfolio = () => {
 
       {/* Projects Section */}
       <motion.section
+        ref={projectsRef}
         className="py-20 px-4 bg-darker-surface"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -890,7 +896,7 @@ const Portfolio = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 whileHover={{ y: -5 }}
               >
-                <a href="/Daniel Odetoye Resume.pdf" download className="block group">
+                <a href={`${import.meta.env.BASE_URL}Daniel Odetoye Resume.pdf`} download className="block group">
                   <div className="relative h-full bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm rounded-2xl border-2 border-neon-green/30 hover:border-neon-green overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-neon-green/20">
                     <div className="absolute inset-0 bg-gradient-to-br from-neon-green/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative p-6 text-center">
