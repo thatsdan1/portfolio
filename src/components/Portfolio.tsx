@@ -350,7 +350,7 @@ const Portfolio = () => {
                         <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan via-neon-purple to-neon-green rounded-full blur-xl opacity-50 animate-pulse-slow"></div>
                         <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-neon-cyan/70 shadow-2xl shadow-neon-cyan/30">
                           <img
-                            src="/headshot1.jpg"
+                            src={`${import.meta.env.BASE_URL}headshot1.jpg`}
                             alt="Daniel Odetoye"
                             className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
                           />
