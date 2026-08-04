@@ -249,13 +249,9 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 
-  /* Hide scrollbar for custom cursor effect */
-  body {
-    cursor: none;
-  }
-
-  /* Show default cursor on interactive elements */
-  button, a, input, textarea {
+  /* Interactive elements get the hand cursor; everything else uses the
+     system default. (The custom cursor this used to hide is gone.) */
+  button, a {
     cursor: pointer;
   }
 }
