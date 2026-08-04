@@ -24,7 +24,6 @@ import { motion, useMotionValue, useSpring, useTransform, useScroll } from "fram
 import { useInView } from "react-intersection-observer";
 import { ParallaxLayer } from "@/components/ParallaxSection";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { MouseFollower } from "@/components/MouseFollower";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { Card3D } from "@/components/Card3D";
 import { RoboTurtle } from "@/components/RoboTurtle";
@@ -299,7 +298,6 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen matrix-bg">
       <ScrollProgress />
-      <MouseFollower />
       <FloatingParticles />
 
       {/* Hero Section */}
@@ -554,10 +552,21 @@ const Portfolio = () => {
                       </div>
 
                       <p className="text-foreground/90 leading-relaxed text-base md:text-lg">
-                        I'm a Computer Science student at the University of Maryland (B.S., May 2027) who builds AI systems that replace manual work. Most recently I was a Software Engineer Program Intern at <span className="text-neon-cyan font-medium">JP Morgan Chase</span>, where I shipped an agentic AI system and a 16-tool MCP server to automate client dataset onboarding across ~20 data domains.
+                        Hey, I'm Daniel. I'm a Computer Science student at the
+                        University of Maryland, and I mostly spend my time making
+                        things — software, photos, events, whatever's in front of me.
                       </p>
                       <p className="text-foreground/90 leading-relaxed text-base md:text-lg">
-                        I'm also a founding engineer at <span className="text-neon-purple font-medium">Safo Sports Group</span>, an AI-powered NIL platform, and I've built government software at the <span className="text-neon-green font-medium">DC Department of Human Services</span> as a Coding it Forward Fellow. Previously a Cloud &amp; AI Engineering Intern at PwC. I'm a QUEST Honors student, MLT Ascend Scholar, and Treasurer of UMD Code Black.
+                        The part I actually like is taking something messy that only
+                        works because one specific person knows how to do it, and
+                        turning it into something that just runs. That's the itch,
+                        whether it's an AI system or a booking page for a photo shoot.
+                      </p>
+                      <p className="text-foreground/90 leading-relaxed text-base md:text-lg">
+                        Outside of code you'll find me behind a camera, on a basketball
+                        court, or somewhere loud with good food and West African music.
+                        I also do a lot of community work on campus, mostly helping
+                        other students find their way into tech.
                       </p>
 
                       <div className="p-4 bg-gradient-to-r from-neon-green/10 to-transparent border-l-4 border-neon-green rounded-r">
