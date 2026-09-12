@@ -70,6 +70,19 @@ a:focus-visible {
     linear-gradient(90deg, rgba(102, 241, 255, 0.035) 1px, transparent 1px),
     var(--bg);
   background-size: 24px 24px;
+  animation: grid-drift 28s linear infinite;
+}
+
+.scroll-progress {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  right: 0;
+  left: 56px;
+  height: 2px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent), #9b7cff);
+  box-shadow: 0 0 14px rgba(102, 241, 255, 0.7);
 }
 
 .portfolio-shell::after {
@@ -102,12 +115,14 @@ a:focus-visible {
   top: 18vh;
   right: -28vw;
   background: #35e7ff;
+  animation: glow-drift-one 15s ease-in-out infinite alternate;
 }
 
 .ambient-glow-two {
   bottom: -30vw;
   left: 20vw;
   background: #6547ff;
+  animation: glow-drift-two 19s ease-in-out infinite alternate;
 }
 
 .system-rail {
@@ -144,6 +159,15 @@ a:focus-visible {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 10px var(--accent);
+  animation: rail-pulse 1.8s ease-in-out infinite;
+}
+
+.rail-nodes i:nth-child(2) {
+  animation-delay: 0.22s;
+}
+
+.rail-nodes i:nth-child(3) {
+  animation-delay: 0.44s;
 }
 
 .site-header {
@@ -174,6 +198,12 @@ a:focus-visible {
   font-size: 13px;
   letter-spacing: -0.04em;
   text-decoration: none;
+  transition: color 160ms ease, text-shadow 160ms ease;
+}
+
+.wordmark:hover {
+  color: var(--ink);
+  text-shadow: 0 0 16px rgba(102, 241, 255, 0.52);
 }
 
 .desktop-nav {
@@ -208,6 +238,16 @@ a:focus-visible {
 .desktop-nav a:hover,
 .resume-link:hover {
   color: var(--ink);
+}
+
+.resume-link svg,
+.hero-actions svg {
+  transition: transform 180ms ease;
+}
+
+.resume-link:hover svg,
+.hero-actions a:hover svg {
+  transform: translate(2px, -2px);
 }
 
 .desktop-nav a:hover::after {
@@ -265,6 +305,7 @@ section {
   white-space: nowrap;
   -webkit-text-stroke: 1px rgba(102, 241, 255, 0.07);
   user-select: none;
+  animation: watermark-drift 12s ease-in-out infinite alternate;
 }
 
 .eyebrow,
@@ -278,6 +319,19 @@ section {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.eyebrow::before,
+.section-label::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  animation: status-pulse 2.4s ease-in-out infinite;
 }
 
 .hero h1 {
@@ -313,6 +367,7 @@ section {
 }
 
 .terminal-readout {
+  position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 12px 24px;
@@ -322,6 +377,20 @@ section {
   border-left: 2px solid var(--accent);
   background: linear-gradient(90deg, rgba(102, 241, 255, 0.07), transparent 74%);
   box-shadow: -14px 0 35px rgba(102, 241, 255, 0.05);
+  overflow: hidden;
+  transform-origin: left center;
+}
+
+.terminal-readout::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -35%;
+  width: 28%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(102, 241, 255, 0.09), transparent);
+  animation: terminal-scan 5.6s ease-in-out 1.4s infinite;
 }
 
 .terminal-readout span {
@@ -370,6 +439,11 @@ section {
 .identity-panel {
   width: 100%;
   justify-self: end;
+  transition: filter 220ms ease;
+}
+
+.identity-panel:hover {
+  filter: drop-shadow(0 16px 32px rgba(102, 241, 255, 0.08));
 }
 
 .identity-code {
@@ -395,10 +469,11 @@ section {
 }
 
 .portrait-frame::before {
-  inset: 48% 0 auto;
+  inset: 0 0 auto;
   height: 1px;
   background: rgba(102, 241, 255, 0.34);
   box-shadow: 0 18px 30px rgba(102, 241, 255, 0.1);
+  animation: portrait-scan 5s ease-in-out infinite;
 }
 
 .portrait-frame::after {
@@ -416,6 +491,12 @@ section {
   object-fit: cover;
   object-position: 52% 44%;
   filter: saturate(0.76) contrast(1.04) brightness(0.82);
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 500ms ease;
+}
+
+.portrait-frame:hover img {
+  transform: scale(1.035);
+  filter: saturate(0.9) contrast(1.05) brightness(0.9);
 }
 
 .portrait-frame span {
@@ -471,6 +552,7 @@ section {
 }
 
 .system-row {
+  position: relative;
   display: grid;
   grid-template-columns: 54px minmax(180px, 0.8fr) minmax(260px, 1.25fr) minmax(145px, 0.55fr);
   gap: 24px;
@@ -478,6 +560,19 @@ section {
   padding: 24px 0;
   border-bottom: 1px solid var(--line);
   transition: padding 180ms ease, background 180ms ease;
+  overflow: hidden;
+}
+
+.system-row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -35%;
+  width: 22%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(102, 241, 255, 0.08), transparent);
+  transition: left 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .system-row:first-child,
@@ -494,6 +589,20 @@ section {
   padding-right: 14px;
   padding-left: 14px;
   background: linear-gradient(90deg, rgba(102, 241, 255, 0.04), transparent);
+}
+
+.system-row:hover::after {
+  left: 112%;
+}
+
+.system-row h3,
+.system-row p,
+.system-row .system-stack {
+  transition: color 180ms ease;
+}
+
+.system-row:hover h3 {
+  color: var(--accent);
 }
 
 .system-row h3,
@@ -580,6 +689,12 @@ section {
   gap: clamp(24px, 4vw, 62px);
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.experience-row:hover {
+  border-color: var(--line-bright);
+  background: linear-gradient(90deg, rgba(102, 241, 255, 0.025), transparent 78%);
 }
 
 .role {
@@ -611,6 +726,12 @@ section {
   gap: 20px;
   padding: 18px 0;
   border-bottom: 1px solid var(--line);
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.skill-row:hover {
+  border-color: var(--line-bright);
+  background: linear-gradient(90deg, rgba(102, 241, 255, 0.035), transparent);
 }
 
 .skill-row h3,
@@ -671,6 +792,7 @@ section {
   display: block;
   color: transparent;
   -webkit-text-stroke: 1px var(--accent);
+  animation: outline-breathe 4.5s ease-in-out infinite;
 }
 
 .contact-links {
@@ -712,6 +834,46 @@ footer {
   50% { opacity: 1; transform: scale(1.15); }
 }
 
+@keyframes grid-drift {
+  to { background-position: 24px 24px, 24px 24px, 0 0; }
+}
+
+@keyframes glow-drift-one {
+  from { transform: translate3d(0, -4%, 0) scale(0.92); }
+  to { transform: translate3d(-14%, 12%, 0) scale(1.1); }
+}
+
+@keyframes glow-drift-two {
+  from { transform: translate3d(-8%, 0, 0) scale(1); }
+  to { transform: translate3d(14%, -12%, 0) scale(1.16); }
+}
+
+@keyframes rail-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes watermark-drift {
+  from { transform: translate3d(-1.5%, 0, 0); }
+  to { transform: translate3d(1.5%, 5px, 0); }
+}
+
+@keyframes terminal-scan {
+  0%, 22% { transform: translateX(0); opacity: 0; }
+  35% { opacity: 1; }
+  62%, 100% { transform: translateX(520%); opacity: 0; }
+}
+
+@keyframes portrait-scan {
+  0%, 100% { transform: translateY(12px); opacity: 0.2; }
+  50% { transform: translateY(420px); opacity: 0.75; }
+}
+
+@keyframes outline-breathe {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(102, 241, 255, 0)); }
+  50% { filter: drop-shadow(0 0 16px rgba(102, 241, 255, 0.16)); }
+}
+
 @media (max-width: 1080px) {
   .desktop-nav {
     display: none;
@@ -748,6 +910,10 @@ footer {
 @media (max-width: 760px) {
   .portfolio-shell {
     padding-left: 0;
+  }
+
+  .scroll-progress {
+    left: 0;
   }
 
   .system-rail {

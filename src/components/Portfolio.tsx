@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import {
   ArrowUpRight,
   FileDown,
@@ -104,6 +104,12 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progressScale = useSpring(scrollYProgress, {
+    stiffness: 130,
+    damping: 26,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -123,6 +129,11 @@ export default function Portfolio() {
 
   return (
     <div className="portfolio-shell">
+      <motion.div
+        className="scroll-progress"
+        style={{ scaleX: progressScale }}
+        aria-hidden="true"
+      />
       <div className="ambient-glow ambient-glow-one" aria-hidden="true" />
       <div className="ambient-glow ambient-glow-two" aria-hidden="true" />
 
@@ -168,13 +179,28 @@ export default function Portfolio() {
             exit={{ opacity: 0, y: -12 }}
           >
             {navItems.map(([label, target], index) => (
-              <a key={target} href={`#${target}`} onClick={closeMenu}>
+              <motion.a
+                key={target}
+                href={`#${target}`}
+                onClick={closeMenu}
+                initial={{ opacity: 0, x: -18 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.06 + index * 0.055 }}
+              >
                 <span>0{index + 1}</span>{label}
-              </a>
+              </motion.a>
             ))}
-            <a href="/Daniel%20Odetoye%20Resume.pdf" target="_blank" rel="noreferrer" onClick={closeMenu}>
+            <motion.a
+              href="/Daniel%20Odetoye%20Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              onClick={closeMenu}
+              initial={{ opacity: 0, x: -18 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.28 }}
+            >
               <span>05</span>Résumé
-            </a>
+            </motion.a>
           </motion.nav>
         )}
       </AnimatePresence>
@@ -188,22 +214,51 @@ export default function Portfolio() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="eyebrow">Software Engineer · AI &amp; Agentic Systems</p>
-            <h1>Daniel <span>Odetoye.</span></h1>
-            <p className="hero-intro">
+            <motion.p
+              className="eyebrow"
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.18, duration: 0.5 }}
+            >
+              Software Engineer · AI &amp; Agentic Systems
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.26, duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Daniel <span>Odetoye.</span>
+            </motion.h1>
+            <motion.p
+              className="hero-intro"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.44, duration: 0.58 }}
+            >
               I build <strong>agentic AI systems and full-stack platforms</strong> that turn manual,
               person-dependent workflows into reliable software.
-            </p>
-            <div className="terminal-readout" aria-label="Core technology profile">
+            </motion.p>
+            <motion.div
+              className="terminal-readout"
+              aria-label="Core technology profile"
+              initial={{ opacity: 0, scaleX: 0.94 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ delay: 0.56, duration: 0.55 }}
+            >
               <span>stack://</span><p>Python · Java · TypeScript · .NET</p>
               <span>systems://</span><p>MCP · FastAPI · AWS · SQL</p>
-            </div>
-            <div className="hero-actions">
+            </motion.div>
+            <motion.div
+              className="hero-actions"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.66, duration: 0.48 }}
+            >
               <a href="#systems">Explore systems <ArrowUpRight size={15} aria-hidden="true" /></a>
               <a href="/Daniel%20Odetoye%20Resume.pdf" target="_blank" rel="noreferrer">
                 Download résumé <FileDown size={15} aria-hidden="true" />
               </a>
-            </div>
+            </motion.div>
           </motion.div>
 
           <motion.aside
@@ -211,6 +266,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ y: -7, rotate: 0.35 }}
             aria-label="Daniel Odetoye portrait and availability"
           >
             <div className="identity-code">IDENT // D/ODE</div>
@@ -225,13 +281,20 @@ export default function Portfolio() {
         <motion.section className="systems section-grid" id="systems" {...reveal}>
           <SectionLabel>01 — Build log</SectionLabel>
           <div className="system-list">
-            {systems.map((system) => (
-              <article className="system-row" key={system.index}>
+            {systems.map((system, index) => (
+              <motion.article
+                className="system-row"
+                key={system.index}
+                initial={{ opacity: 0, x: -26 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.45 }}
+                transition={{ duration: 0.52, delay: index * 0.075, ease: [0.22, 1, 0.36, 1] }}
+              >
                 <span className="system-index">{system.index}</span>
                 <h3>{system.title}</h3>
                 <p>{system.description}</p>
                 <span className="system-stack">{system.stack}</span>
-              </article>
+              </motion.article>
             ))}
           </div>
         </motion.section>
@@ -246,10 +309,22 @@ export default function Portfolio() {
               athlete-brand matching and public-service software.
             </p>
             <dl className="fact-list">
-              <div><dt>Base</dt><dd>College Park, Maryland</dd></div>
-              <div><dt>Study</dt><dd>University of Maryland · Computer Science</dd></div>
-              <div><dt>Focus</dt><dd>AI systems · Full-stack engineering</dd></div>
-              <div><dt>Programs</dt><dd>QUEST Honors · MLT Ascend</dd></div>
+              {[
+                ["Base", "College Park, Maryland"],
+                ["Study", "University of Maryland · Computer Science"],
+                ["Focus", "AI systems · Full-stack engineering"],
+                ["Programs", "QUEST Honors · MLT Ascend"],
+              ].map(([term, detail], index) => (
+                <motion.div
+                  key={term}
+                  initial={{ opacity: 0, x: 18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.7 }}
+                  transition={{ duration: 0.42, delay: index * 0.07 }}
+                >
+                  <dt>{term}</dt><dd>{detail}</dd>
+                </motion.div>
+              ))}
             </dl>
           </div>
         </motion.section>
@@ -257,15 +332,23 @@ export default function Portfolio() {
         <motion.section className="experience section-grid" id="experience" {...reveal}>
           <SectionLabel>03 — Experience log</SectionLabel>
           <div className="experience-list">
-            {experience.map((item) => (
-              <article className="experience-row" key={`${item.company}-${item.period}`}>
+            {experience.map((item, index) => (
+              <motion.article
+                className="experience-row"
+                key={`${item.company}-${item.period}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.48 }}
+                transition={{ duration: 0.5, delay: index * 0.065, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ x: 8 }}
+              >
                 <div>
                   <h3>{item.company}</h3>
                   <p className="role">{item.role}</p>
                 </div>
                 <p className="experience-copy">{item.description}</p>
                 <p className="experience-meta">{item.location}<br />{item.period}</p>
-              </article>
+              </motion.article>
             ))}
           </div>
         </motion.section>
@@ -273,11 +356,19 @@ export default function Portfolio() {
         <motion.section className="toolkit section-grid" id="toolkit" {...reveal}>
           <SectionLabel>04 — Technical matrix</SectionLabel>
           <div className="skill-grid">
-            {skills.map(([label, list]) => (
-              <div className="skill-row" key={label}>
+            {skills.map(([label, list], index) => (
+              <motion.div
+                className="skill-row"
+                key={label}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.7 }}
+                transition={{ duration: 0.45, delay: index * 0.07 }}
+                whileHover={{ x: 6 }}
+              >
                 <h3>{label}</h3>
                 <p>{list}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.section>
@@ -285,15 +376,25 @@ export default function Portfolio() {
         <motion.section className="formation section-grid" id="formation" {...reveal}>
           <SectionLabel>05 — Formation</SectionLabel>
           <div className="formation-grid">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.55 }}
+            >
               <h3>University of Maryland</h3>
               <p>B.S. in Computer Science</p>
               <p className="formation-detail">
                 Coursework in data structures and algorithms, object-oriented programming,
                 computer systems, and calculus.
               </p>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+            >
               <h3>Leadership &amp; community</h3>
               <ul>
                 <li>QUEST Honors Program · Technology, business, and data strategy</li>
@@ -301,7 +402,7 @@ export default function Portfolio() {
                 <li>UMD Code Black · Treasurer</li>
                 <li>NSBE · ColorStack @ UMD · Code Black</li>
               </ul>
-            </div>
+            </motion.div>
           </div>
         </motion.section>
 
@@ -310,9 +411,9 @@ export default function Portfolio() {
           <div className="contact-layout">
             <h2>Let’s build systems that <span>remove the manual work.</span></h2>
             <div className="contact-links">
-              <a href="mailto:dodetoye@terpmail.umd.edu"><Mail size={16} aria-hidden="true" />Email Daniel</a>
-              <a href="https://www.linkedin.com/in/danielodetoye" target="_blank" rel="noreferrer"><Linkedin size={16} aria-hidden="true" />LinkedIn</a>
-              <a href="https://github.com/thatsdan1" target="_blank" rel="noreferrer"><Github size={16} aria-hidden="true" />GitHub</a>
+              <motion.a href="mailto:dodetoye@terpmail.umd.edu" whileHover={{ x: 8 }}><Mail size={16} aria-hidden="true" />Email Daniel</motion.a>
+              <motion.a href="https://www.linkedin.com/in/danielodetoye" target="_blank" rel="noreferrer" whileHover={{ x: 8 }}><Linkedin size={16} aria-hidden="true" />LinkedIn</motion.a>
+              <motion.a href="https://github.com/thatsdan1" target="_blank" rel="noreferrer" whileHover={{ x: 8 }}><Github size={16} aria-hidden="true" />GitHub</motion.a>
             </div>
           </div>
         </motion.section>
